@@ -288,9 +288,9 @@ class AdminController extends Controller
     public function editProject($id){
         $title = "Edit Project";
         $websettings = websetting::find(1);
-        $project= project::with("projectImages","niche","websettings")->find($id);
+        $project= project::with("projectImages","niche",)->find($id);
         $niche = niches::all();
-        $data = compact("title","project","niche");
+        $data = compact("title","project","niche","websettings");
 
         return view("Admin.portfolio-management.project-management.edit-project")->with($data);
     }

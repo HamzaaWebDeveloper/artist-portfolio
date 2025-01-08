@@ -70,7 +70,7 @@
 }
 
 .btn-width{
-    width: 8rem;
+    width: 9rem;
 }
 
 .button-text {
@@ -98,48 +98,45 @@
 </style>
     <main class="main">
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero section dark-background">
+<!-- Hero Section -->
+<section id="hero" class="hero section dark-background">
+    <div id="particles-js"></div> <!-- Particle.js Background -->
 
-        <div id="particles-js"></div> <!-- Particle.js Container -->
+    <!-- Hero Content Section -->
+    <div class="container text-center">
+        <div class="hero-content">
+            <h2 class="hero-title">{{ ucfirst($websetting->tagline) }} <span>.</span></h2>
+            <p class="hero-description">Explore new worlds, where the adventure never stops.</p>
 
-        <div class="container">
-            <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
-                <div class="hero-content">
-                    <h2 class="">{{ucfirst($websetting->tagline)}}<span>.</span></h2>
-                    <p>We are a team of talented <span id="dynamic-text"></span></p>
-                </div>
-            </div>
         </div>
+    </div>
+</section>
 
-    </section><!-- /Hero Section -->
+<!-- /Hero Section -->
 
 
 
         <!-- About Section -->
         <section id="about" class="about section">
 
-                 <!-- Section Title -->
-                 <div class="container section-title" data-aos="fade-up" style="padding: 10px">
-                    <h2>Story</h2>
-                    <p>Where every tale begin</p>
-                </div><!-- End Section Title -->
+            <!-- Section Title -->
+            <div class="container section-title about-css" style="padding: 10px">
+                <h2>Story</h2>
+                <p class="tagline">Where every tale begins</p>
+            </div><!-- End Section Title -->
 
-            <div class="container mb" data-aos="fade-up" data-aos-delay="100">
-
-            <p>{{ $websetting->Story }}</p>
-
+            <div class="container mb">
+                <p class="story">{{ $websetting->Story }}</p>
             </div>
 
         </section><!-- /About Section -->
 
 
-
         <!-- Services Section -->
-        <section id="services" class="services section">
+        <section id="services" class="services section" style="position: relative; overflow: hidden;">
 
             <!-- Section Title -->
-            <div class="container section-title" data-aos="fade-up">
+            <div class="container section-title-services" data-aos="fade-up">
                 <h2>Services</h2>
                 <p>Creative solutions, exceptional results.</p>
             </div><!-- End Section Title -->
@@ -148,26 +145,29 @@
 
                 <div class="row gy-4">
 
-                    @foreach ($services->where("status","==","1") as $service)
-                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="service-item position-relative">
-                            <!-- Icon Section -->
-                            <div class="icon">
-                                <img src="{{ asset('Service/icons/' . $service->icon) }}" alt="{{ $service->name }} icon" class="service-icon">
+                    @if($services->isNotEmpty())
+                        @foreach ($services->where("status","==","1") as $service)
+                        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="service-item position-relative">
+                                <!-- Icon Section -->
+                                <div class="icon">
+                                    <img src="{{ asset('Service/icons/' . $service->icon) }}" alt="{{ $service->name }} icon" class="service-icon">
+                                </div>
+                                <!-- Service Details -->
+                                <a href="" class="stretched-link">
+                                    <h3 class="service-name">{{ ucfirst($service->name) }}</h3>
+                                </a>
+                                <p>{{ ucfirst(Str::limit($service->description, 200, '...')) }}</p>
+
+                                <a href="{{ route("service.details",['id'=>$service->id]) }}" class="btn button mt-3 mx-auto btn-width btn-sm">
+                                    <p class="button-text">Read More</p> <p class="iconer"><svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></p>
+                                </a>
                             </div>
-                            <!-- Service Details -->
-                            <a href="" class="stretched-link">
-                                <h3 class="service-name">{{ ucfirst($service->name) }}</h3>
-                            </a>
-                            <p>{{ ucfirst(Str::limit($service->description, 200, '...')) }}</p>
-
-                            <a href="{{ route("service.details",['id'=>$service->id]) }}" class="btn button mt-3 mx-auto btn-width btn-sm">
-                                <p class="button-text">Read More</p> <p class="iconer"><svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg></p>
-                              </a>
-                        </div>
-                    </div><!-- End Service Item -->
-                @endforeach
-
+                        </div><!-- End Service Item -->
+                        @endforeach
+                    @else
+                    <h3 class="fw-bold text-dark text-center">Will Update the Service Soon</h3>
+                    @endif
 
                 </div>
 
@@ -184,35 +184,39 @@
             </div><!-- End Section Title -->
 
             <div class="container">
-                <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
-                    <!-- Dynamic Filters -->
-                    <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        @foreach($niches->where("status","==","1") as $niche)
-                            <li data-filter=".filter-{{ $niche->id }}">{{ $niche->name }}</li>
-                        @endforeach
-                    </ul><!-- End Portfolio Filters -->
+        @if($niches->isNotEmpty())
+        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+            <!-- Dynamic Filters -->
+            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+                <li data-filter="*" class="filter-active">All</li>
+                @foreach($niches->where("status","==","1") as $niche)
+                    <li data-filter=".filter-{{ $niche->id }}">{{ $niche->name }}</li>
+                @endforeach
+            </ul><!-- End Portfolio Filters -->
 
-                    <!-- Portfolio Items -->
-                    <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
-                        @foreach($portfolio->where("status","==","1") as $project)
-                            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $project->niche->id }}">
-                                @foreach ($project->projectImages->take(1) as $images)
-                                    <img src="{{ asset('project/projectImages/'.$images->project_images) }}" class="img-thumbnail-circle" style="object-fit: cover; width: 100%; height: 100%;" alt="">
-                                @endforeach
-                                <div class="portfolio-info">
-                                    <h4>{{ $project->name }}</h4>
-                                    <p>{{ Str::limit($project->description, 100, '...') }}</p>
-
-                                    <!-- Modal trigger button with dynamic ID -->
-                                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}" class="preview-link">
-                                        <i class="bi bi-zoom-in"></i>
-                                    </a>
-                                </div>
-                            </div>
+            <!-- Portfolio Items -->
+            <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+                @foreach($portfolio->where("status","==","1") as $project)
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $project->niche->id }}">
+                        @foreach ($project->projectImages->take(1) as $images)
+                            <img src="{{ asset('project/projectImages/'.$images->project_images) }}" class="img-thumbnail-circle" style="object-fit: cover; width: 100%; height: 100%;" alt="">
                         @endforeach
-                    </div><!-- End Portfolio Container -->
-                </div>
+                        <div class="portfolio-info">
+                            <h4>{{ $project->name }}</h4>
+                            <p>{{ Str::limit($project->description, 100, '...') }}</p>
+
+                            <!-- Modal trigger button with dynamic ID -->
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#projectModal{{ $project->id }}" class="preview-link">
+                                <i class="bi bi-zoom-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div><!-- End Portfolio Container -->
+        </div>
+        @else
+        <h3 class="fw-bold text-dark text-center">Will Update the Service Soon</h3>
+        @endif
             </div>
 
             <!-- Modal Template (Repeat dynamically for each project) -->
@@ -600,6 +604,34 @@
             iso.layout();
         });
     });
+});
+
+
+// Add class when About section is in the viewport
+window.addEventListener("scroll", function() {
+    const aboutSection = document.querySelector(".about");
+    const aboutPosition = aboutSection.getBoundingClientRect();
+
+    // If the About section is in the viewport
+    if (aboutPosition.top <= window.innerHeight && aboutPosition.bottom >= 0) {
+        aboutSection.classList.add("active");
+    } else {
+        aboutSection.classList.remove("active"); // Optionally, remove animation when out of view
+    }
+});
+
+window.addEventListener("scroll", function() {
+    const portfolioSection = document.querySelector(".portfolio");
+    const portfolioPosition = portfolioSection.getBoundingClientRect();
+
+    // If the Portfolio section is in the viewport
+    if (portfolioPosition.top <= window.innerHeight && portfolioPosition.bottom >= 0) {
+        // Add the active class to trigger the animation
+        portfolioSection.classList.add('active');
+    } else {
+        // Optionally, remove the active class if the section is out of view
+        portfolioSection.classList.remove('active');
+    }
 });
 
 

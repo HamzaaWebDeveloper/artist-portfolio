@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@400..700&family=Jersey+15&display=swap');
 
 /* Fonts */
 :root {
@@ -753,10 +755,7 @@ h6 {
 /*--------------------------------------------------------------
 # Global Sections
 --------------------------------------------------------------*/
-section,
-.section {
-    color: var(--default-color);
-    background-color: var(--background-color);
+section,.section {
     padding: 60px 0;
     scroll-margin-top: 80px;
     overflow: clip;
@@ -780,13 +779,13 @@ section,
 
 .section-title h2 {
     font-size: 14px;
-    font-weight: 500;
+    font-weight: bold;
     padding: 0;
     line-height: 1px;
     margin: 0;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--default-color), transparent 50%);
+    color: #000000;
     position: relative;
 }
 
@@ -800,115 +799,106 @@ section,
 }
 
 .section-title p {
-    color: var(--heading-color);
+    color: #000000;
     margin: 0;
-    font-size: 36px;
+    font-size: 75px;
     font-weight: 700;
     text-transform: uppercase;
+    font-family: "Jersey 15", serif;
+
 }
 
 /*--------------------------------------------------------------
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-    width: 100%;
-    min-height: 100vh;
     position: relative;
-    padding: 0px 0 80px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;}
-
-.hero img {
-    position: absolute;
-    inset: 0;
-    display: block;
+    min-height: 100vh;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background: url("/cityscape-anime-inspired-urban-area.jpg") no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
     z-index: 1;
 }
 
 .hero:before {
     content: "";
-    background: color-mix(in srgb, var(--background-color), transparent 30%);
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
     z-index: 2;
 }
 
 .hero .container {
     position: relative;
     z-index: 3;
-}
-
-.hero h2 {
-    margin: 0;
-    font-size: 70px;
-    white-space: nowrap;
-    font-family: "Exo 2", serif;
-    font-weight: normal;
-}
-
-.hero h2 span {
-    color: var(--accent-color);
-}
-
-.hero p {
-    margin: 10px 0 0 0;
-    font-size: 24px;
-    color: color-mix(in srgb, var(--default-color), transparent 30%);
-}
-
-.hero .icon-box {
-    padding: 30px 20px;
-    transition: ease-in-out 0.3s;
-    border: 1px solid color-mix(in srgb, var(--default-color), transparent 70%);
-    height: 100%;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    color: #fff;
+    padding: 50px;
 }
 
-.hero .icon-box i {
-    font-size: 32px;
-    line-height: 1;
-    color: var(--accent-color);
-}
-
-.hero .icon-box h3 {
+.hero-title {
+    font-size: 60px;
+    font-family: 'Exo 2', sans-serif;
     font-weight: 700;
-    margin: 10px 0 0 0;
-    padding: 0;
-    line-height: 1;
-    font-size: 20px;
-    line-height: 26px;
+    text-shadow: 0px 0px 20px rgba(255, 0, 150, 1), 0px 0px 40px rgba(255, 0, 150, 0.8);
+    animation: fadeIn 2s ease-in-out;
 }
 
-.hero .icon-box h3 a {
-    color: color-mix(in srgb, var(--default-color), transparent 20%);
-    transition: ease-in-out 0.3s;
+.hero-description {
+    font-size: 24px;
+    margin: 20px 0;
+    text-shadow: 0px 0px 15px rgba(255, 255, 255, 0.7);
+    animation: fadeIn 2s ease-in-out;
 }
 
-.hero .icon-box:hover {
-    border-color: var(--accent-color);
+.hero-btn {
+    margin-top: 30px;
 }
 
-.hero .icon-box:hover h3 a {
-    color: var(--accent-color);
+.hero-btn .cta-btn {
+    font-size: 18px;
+    padding: 15px 25px;
+    background: #ff0066;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.hero-btn .cta-btn:hover {
+    background: #ff6699;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 768px) {
-    .hero h2 {
+    .hero-title {
         font-size: 32px;
     }
 
-    .hero p {
+    .hero-description {
         font-size: 18px;
     }
 }
+
 
 /*--------------------------------------------------------------
 # About Section
@@ -941,6 +931,68 @@ section,
 
 .about .content p:last-child {
     margin-bottom: 0;
+}
+
+.about-css{
+    font-family: "Jersey 15", serif !important;
+    font-size: 20px !important;
+}
+
+/* About section style */
+.about {
+    position: relative;
+    overflow: hidden;
+    padding: 127px 0;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Fade-in transition */
+}
+
+/* Tagline Animation */
+.tagline {
+    position: relative;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+/* Vibrant Color Effect */
+.about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #eee; /* Vibrant color */
+    z-index: -1;
+    transform: translateX(100%); /* Start from the right side */
+    transition: transform 1s ease-out; /* Smooth animation */
+    will-change: transform; /* Optimize for animation */
+}
+
+/* Add class to trigger animation */
+.about.active {
+    opacity: 1; /* Fade in the whole section */
+}
+
+.about.active .tagline {
+    transform: translateX(0);
+    opacity: 1; /* Show text */
+}
+
+.about.active::before {
+    transform: translateX(0); /* Vibrant color fills the section and stays */
+}
+
+/* Ensure the color stays when the animation completes */
+.about.active::before {
+    background-color: #eee; /* Keep the vibrant color after animation */
+    color: red;
+}
+
+.story{
+    font-family: "Edu NSW ACT Foundation", serif;
+    font-size: 23px;
 }
 
 /*--------------------------------------------------------------
@@ -1017,6 +1069,45 @@ section,
 /*--------------------------------------------------------------
 # Services Section
 --------------------------------------------------------------*/
+
+
+.section-title-services {
+    padding-bottom: 60px;
+    position: relative;
+}
+
+.section-title-services h2 {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0;
+    line-height: 1px;
+    margin: 0;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #eee;
+    position: relative;
+}
+
+.section-title-services h2::after {
+    content: "";
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    background: var(--accent-color);
+    margin: 4px 10px;
+}
+
+.section-title-services p {
+    color: #eee;
+    margin: 0;
+    font-size: 100px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Jersey 15", serif;
+
+}
+
+
 .services .service-item {
     background-color: var(--surface-color);
     text-align: center;
@@ -1054,7 +1145,7 @@ section,
 
 .services .service-item p {
     line-height: 24px;
-    font-size: 14px;
+    font-size: 17px;
     margin-bottom: 0;
 }
 
@@ -1062,6 +1153,33 @@ section,
     box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
     transform: translateY(-10px);
 }
+
+
+    /* Floating particles or glowing background animation */
+ /* Parallax background effect */
+.services {
+    position: relative;
+    background: url('/servicesbg.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 100px 0;
+    font-family: "Ysabeau", sans-serif;
+    font-size: 18px;
+}
+
+.services::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);  /* Dark overlay for text contrast */
+    z-index: 1;
+}
+
+
+
+
 
 /*--------------------------------------------------------------
 # Call To Action Section
@@ -1129,6 +1247,52 @@ section,
 /*--------------------------------------------------------------
 # Portfolio Section
 --------------------------------------------------------------*/
+.portfolio {
+    position: relative;
+    overflow: hidden;
+    padding: 127px 0;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Fade-in transition */
+}
+
+/* Tagline Animation (This will apply to the portfolio info section) */
+.portfolio .portfolio-info {
+    position: relative;
+    opacity: 0;
+    transform: translateY(-300%); /* Start off-screen */
+    transition: transform 1s ease, opacity 1s ease;
+}
+
+/* Vibrant Color Effect */
+.portfolio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #eee; /* Vibrant color */
+    z-index: -1;
+    transform: translateY(-300%); /* Start from the bottom */
+    transition: transform 2s ease-out; /* Smooth movement */
+    will-change: transform; /* Optimize for animation */
+}
+
+/* When the portfolio section is active */
+.portfolio.active {
+    opacity: 1; /* Fade in the whole section */
+}
+
+.portfolio.active .portfolio-info {
+    transform: translateY(0); /* Move to original position */
+    opacity: 1; /* Show text */
+}
+
+.portfolio.active::before {
+    transform: translateY(0); /* Vibrant color fills the section */
+}
+
+
 .portfolio .portfolio-filters {
     padding: 0;
     margin: 0 auto 20px auto;

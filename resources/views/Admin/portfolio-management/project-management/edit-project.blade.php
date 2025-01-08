@@ -61,7 +61,7 @@
 
                                     <div class="col-lg-6 mb-2">
                                         <label for="" class="fw-bold">New Project Images</label>
-                                        <input type="file" required name="project_images[]" value="{{ old("project_images") }}" id="" class="form-control" multiple>
+                                        <input type="file"  name="project_images[]" value="{{ old("project_images") }}" id="" class="form-control" multiple>
                                     </div>
 
                                     <div class="col-lg-6 mb-2">
