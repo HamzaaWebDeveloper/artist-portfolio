@@ -1,6 +1,6 @@
 @if(Route::is("service.details"))
 <header id="header" class="header d-flex align-items-center fixed-top" style="background-color: black">
-    <div class="container-fluid navbar-css container-xl position-relative d-flex align-items-center justify-content-between">
+    <div class="container-fluid navbar-css container-xl position-relative d-flex align-items-center justify-content-between onscrolled-css">
 
         <a href="{{ route("index") }}" class="logo d-flex align-items-center me-auto me-lg-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -38,7 +38,7 @@
 </header>
 @else
 <header id="header" class="header d-flex align-items-center fixed-top" >
-    <div class="container-fluid navbar-css container-xl position-relative d-flex align-items-center justify-content-between">
+    <div class="container-fluid navbar-css container-xl position-relative d-flex align-items-center justify-content-between onscrolled-css">
 
         <a href="{{ route("index") }}" class="logo d-flex align-items-center me-auto me-lg-0">
             <!-- Uncomment the line below if you also wish to use an image logo -->

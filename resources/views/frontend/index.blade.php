@@ -177,6 +177,12 @@
 
         <!-- Portfolio Section -->
         <section id="portfolio" class="portfolio section">
+
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+                    <path fill="#000000" fill-opacity="1" d="M0,32L80,58.7C160,85,320,139,480,181.3C640,224,800,256,960,261.3C1120,267,1280,245,1360,234.7L1440,224L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+                </svg>
+            </div>
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
                 <h2>Portfolio</h2>
@@ -187,7 +193,7 @@
         @if($niches->isNotEmpty())
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
             <!-- Dynamic Filters -->
-            <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <ul class="portfolio-filters  isotope-filters" data-aos="fade-up" data-aos-delay="100">
                 <li data-filter="*" class="filter-active">All</li>
                 @foreach($niches->where("status","==","1") as $niche)
                     <li data-filter=".filter-{{ $niche->id }}">{{ $niche->name }}</li>
