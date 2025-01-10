@@ -37,18 +37,16 @@
     <!-- Main Wrapper -->
     <div class="main-wrapper">
 
-   @if(Route::is("profile"))
-    @include('Admin.layouts.header')
+        @if(!session("admin_id"))
+        <!-- If no admin_id in session, only display the content -->
+        @yield('reviews')  <!-- Or you can add some default content here if needed -->
+    @else
+        <!-- For routes with admin_id in session, show the full layout with header and sidebar -->
+        @include('Admin.layouts.header')
+        @include('Admin.layouts.sidebar')
+        @yield('content')
+    @endif
 
-    @yield('content')
-
-   @else
-    @include('Admin.layouts.header')
-
-    @include('Admin.layouts.sidebar')
-
-    @yield('content')
-   @endif
 
     </div>
     <!-- /Main Wrapper -->

@@ -68,6 +68,91 @@
     <!-- Vendor JS Files -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    {{-- swiper js  --}}
+        <script>
+              var swiper = new Swiper(".mySwiper", {
+        grabCursor: true,
+        effect: "creative",
+        creativeEffect: {
+          prev: {
+            shadow: true,
+            translate: [0, 0, -400],
+          },
+          next: {
+            translate: ["100%", 0, 0],
+          },
+        },
+      });
+        </script>
+      {{-- End --}}
+
+    {{-- Gsap Cdn --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+
+
+    {{-- Gsap Js --}}
+        <script>
+        // Register the ScrollTrigger plugin
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Trigger the animation when the #portfolio-filters section comes into view
+        gsap.from("#portfolio-filters", {
+            y: -300,
+            x: -1000,
+            duration: 2,
+            delay: 1,
+            ease: "power4.out",
+            clearProps: "transform",
+            scrollTrigger: {
+                trigger: "#portfolio-filters",
+                start: "top bottom",
+                end: "bottom top",
+                once: true,
+                onEnter: () => {
+                    gsap.to("#portfolio-filters", {
+                        opacity: 1,
+                        duration: 1
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.set("#portfolio-filters", { opacity: 0 });
+                }
+            }
+        });
+
+        gsap.from("#swipe",{
+
+
+            x: 500,
+            duration: 2,
+            delay: 1,
+            ease: "power4.out",
+            clearProps: "transform",
+            scrollTrigger: {
+                trigger: "#swipe",
+                start: "top bottom",
+                end: "bottom top",
+                once: true,
+                onEnter: () => {
+                    gsap.to("#swipe", {
+                        opacity: 1,
+                        duration: 1
+                    });
+                },
+                onLeaveBack: () => {
+                    gsap.set("#swipe", { opacity: 0 });
+                }
+            }
+        })
+
+    </script>
+    {{-- End --}}
+
+    {{-- End --}}
     @include("frontend.layouts.toastr")
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
@@ -77,6 +162,7 @@
     <script src="{{ asset('assets/vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+
 
     {{--  Partical Js  --}}
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
@@ -189,7 +275,7 @@
     {{--  End  --}}
 
     {{--  Typing Effect  --}}
-    <script>
+    {{-- <script>
         document.addEventListener("DOMContentLoaded", function() {
             const roles = ["Web Developer", "Graphics Artist", "Video Editor", "SEO Experts", "WordPress Developer",
                 "Shopify Experts", "Content Writing",
@@ -226,7 +312,7 @@
 
             typeWriter(); // Start typing effect
         });
-    </script>
+    </script> --}}
     {{--  End  --}}
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>

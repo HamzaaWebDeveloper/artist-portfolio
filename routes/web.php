@@ -26,6 +26,16 @@ Route::get("/service-details/{id}",[IndexController::class,"details"])->name("se
 // End
 
 
+// Add Review For Normal User As Well
+
+// Reviews Page
+Route::get("/add-reviews",[AdminController::class, "addReview"])->name("add.reviews");
+
+// Store Review
+Route::post("/store-reviews",[AdminController::class, 'storeReviews'])->name("store.reviews");
+
+// End
+
 
 // Route For Admin Panel
 
@@ -45,6 +55,7 @@ Route::prefix("auth")->group(function(){
     Route::get("/logout",[AdminController::class, "logout"])->name("logout");
 });
 
+// Admin Middleware Has been started
 Route::middleware([AdminMiddleware::class])->group(function(){
 
 // Dashboard
@@ -154,9 +165,27 @@ Route::prefix("admin-profile")->group(function () {
     Route::post("/admin-profile-edit", [AdminController::class, 'adminProfileEdit'])->name("admin.profile.edit");
 });
 
+// Review Management
+Route::prefix("review-management")->group(function(){
+    // Index Page
+    Route::get("/review-management",[AdminController::class, "review"])->name("review.management");
 
+    // Edit Page
+    Route::get("/edit-review/{id}",[AdminController::class, "editReview"])->name("edit.review");
+
+    // Edit Reviews
+    Route::post("/edit-store/{id}",[AdminController::class, 'editStoreReviews'])->name("edit.store.review");
+
+    // Update Reviews
+    Route::get("/update-review/{id}",[AdminController::class, "updateReviews"])->name("update.review");
+
+    // delete Reviews
+    Route::get("/delete-review/{id}",[AdminController::class, "deleteReviews"])->name("delete.review");
+});
 
 });
+
+// End
 
 
 });

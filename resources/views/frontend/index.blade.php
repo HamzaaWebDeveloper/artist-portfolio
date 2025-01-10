@@ -193,7 +193,7 @@
         @if($niches->isNotEmpty())
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
             <!-- Dynamic Filters -->
-            <ul class="portfolio-filters  isotope-filters" data-aos="fade-up" data-aos-delay="100">
+            <ul class="portfolio-filters  isotope-filters" id="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
                 <li data-filter="*" class="filter-active">All</li>
                 @foreach($niches->where("status","==","1") as $niche)
                     <li data-filter=".filter-{{ $niche->id }}">{{ $niche->name }}</li>
@@ -205,7 +205,8 @@
                 @foreach($portfolio->where("status","==","1") as $project)
                     <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-{{ $project->niche->id }}">
                         @foreach ($project->projectImages->take(1) as $images)
-                            <img src="{{ asset('project/projectImages/'.$images->project_images) }}" class="img-thumbnail-circle" style="object-fit: cover; width: 100%; height: 100%;" alt="">
+                        <img src="{{ asset('project/projectImages/'.$images->project_images) }}"class="img-thumbnail-circle portfolio-image" alt="">
+
                         @endforeach
                         <div class="portfolio-info">
                             <h4>{{ $project->name }}</h4>
@@ -274,7 +275,7 @@
 
         <!-- /Portfolio Section -->
 
-        <!-- Stats Section -->
+        {{-- <!-- Stats Section -->
         <section id="stats" class="stats section">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -348,156 +349,74 @@
 
             </div>
 
-        </section><!-- /Stats Section -->
+        </section><!-- /Stats Section --> --}}
 
-        {{--  <!-- Testimonials Section -->
-        <section id="testimonials" class="testimonials section dark-background">
+         <!-- Testimonials Section -->
 
-            <img src="assets/img/testimonials-bg.jpg" class="testimonials-bg" alt="">
+        <section id="testimonials" class="testimonials section ">
 
-            <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <!-- Section Title -->
+        <div class="container section-title-testimonials" data-aos="fade-up">
+            <h2>Testimonial</h2>
+            <p>See What Our Clients Are Saying!.</p>
 
-                <div class="swiper init-swiper">
-                    <script type="application/json" class="swiper-config">
-            {
-              "loop": true,
-              "speed": 600,
-              "autoplay": {
-                "delay": 5000
-              },
-              "slidesPerView": "auto",
-              "pagination": {
-                "el": ".swiper-pagination",
-                "type": "bullets",
-                "clickable": true
-              }
-            }
-          </script>
-                    <div class="swiper-wrapper">
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Saul Goodman</h3>
-                                <h4>Ceo &amp; Founder</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
+
+                <div class="col-lg-4">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            @foreach($reviews->where("status" ,"==", 1) as $review)
+                            <div class="swiper-slide">
+                                <div class="book" style="background-image: url('/Blue and White Cloud Wallpaper.png'); opacity: initial;">
+                                    <p class="book-text">{{ $review->review }}</p>
+                                    <div class="social-links-books d-flex mt-4">
+                                        @if($review->instagram)
+                                            <a href="{{ $review->instagram }}"><i class="bi bi-instagram"></i></a>
+                                        @endif
+                                        @if($review->reddit)
+                                            <a href="{{ $review->reddit }}"><i class="bi bi-reddit"></i></a>
+                                        @endif
+                                        @if($review->twitter)
+                                            <a href="{{ $review->twitter }}"><i class="bi bi-twitter"></i></a>
+                                        @endif
+                                        @if($review->gamejolt)
+                                            <a href="{{ $review->gamejolt }}"><i class="fa-solid fa-bolt"></i></a>
+                                        @endif
+                                        @if($review->discord)
+                                            <a href="{{ $review->discord }}"><i class="bi bi-discord"></i></a>
+                                        @endif
+                                        @if($review->tiktok)
+                                            <a href="{{ $review->tiktok }}"><i class="bi bi-tiktok"></i></a>
+                                        @endif
+                                    </div>
+                                    <div class="cover">
+                                        <p class="book-heading">{{ $review->name }}</p>
+                                    </div>
                                 </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit
-                                        rhoncus.
-                                        Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at
-                                        semper.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
                             </div>
-                        </div><!-- End testimonial item -->
+                        @endforeach
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Sara Wilsson</h3>
-                                <h4>Designer</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid
-                                        cillum eram
-                                        malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim
-                                        culpa.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
+                        </div>
 
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Jena Karlis</h3>
-                                <h4>Store Owner</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem
-                                        veniam duis
-                                        minim tempor labore quem eram duis noster aute amet eram fore quis sint
-                                        minim.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>Matt Brandon</h3>
-                                <h4>Freelancer</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
-                                        fugiat minim
-                                        velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore
-                                        labore illum
-                                        veniam.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img"
-                                    alt="">
-                                <h3>John Larson</h3>
-                                <h4>Entrepreneur</h4>
-                                <div class="stars">
-                                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i
-                                        class="bi bi-star-fill"></i>
-                                </div>
-                                <p>
-                                    <i class="bi bi-quote quote-icon-left"></i>
-                                    <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
-                                        noster veniam enim
-                                        culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore
-                                        nisi cillum
-                                        quid.</span>
-                                    <i class="bi bi-quote quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div><!-- End testimonial item -->
-
-                    </div>
-                    <div class="swiper-pagination"></div>
+                       <div class="mt-3 " id="swipe">
+                        <p class="fw-bold swipe">Swipe this way <i class="bi bi-arrow-left arrow"></i></p>
+                       </div>
+                      </div>
                 </div>
 
-            </div>
+                <div class="col-lg-6">
 
-        </section><!-- /Testimonials Section -->  --}}
+                </div>
+
+        </div><!-- End Section Title -->
+
+        </section>
+
+        <!-- /Testimonials Section -->
 
 
         <!-- Contact Section -->
-        <section id="contact" class="contact section">
+        <section id="contact" class="contact section" style="background-color: #eee">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -507,12 +426,7 @@
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-                <div class="mb-4" data-aos="fade-up" data-aos-delay="200">
-                    <iframe style="border:0; width: 100%; height: 270px;"
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d48389.78314118045!2d-74.006138!3d40.710059!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a22a3bda30d%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1676961268712!5m2!1sen!2sus"
-                        frameborder="0" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div><!-- End Google Maps -->
+
 
                 <div class="row gy-4">
 
@@ -584,13 +498,15 @@
         </section><!-- /Contact Section -->
 
     </main>
+
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-    const isotopeContainer = document.querySelector('.isotope-container');
-    const iso = new Isotope(isotopeContainer, {
+        const isotopeContainer = document.querySelector('.isotope-container');
+        const iso = new Isotope(isotopeContainer, {
         itemSelector: '.isotope-item',
         layoutMode: 'masonry',
-    });
+        });
 
     // Filter functionality
     const filters = document.querySelectorAll('.portfolio-filters li');
@@ -639,6 +555,20 @@ window.addEventListener("scroll", function() {
         portfolioSection.classList.remove('active');
     }
 });
+
+// Block user to steal something
+
+// Block Right-Click
+// document.addEventListener('contextmenu', function(event) {
+//     event.preventDefault();
+// });
+
+// // Block F12 (DevTools) and Ctrl+Shift+I
+// document.addEventListener('keydown', function(event) {
+//     if ((event.key === 'F12') || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+//         event.preventDefault();
+//     }
+// });
 
 
 

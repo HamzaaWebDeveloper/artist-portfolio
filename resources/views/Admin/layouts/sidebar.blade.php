@@ -11,8 +11,12 @@
 
                 <li class="{{ Route::is('service.management', 'edit.service', 'add.service') ? 'active' : '' }}">
                     <a href="{{ route('service.management') }}"><i class="fa-solid fa-hand-holding-heart"></i>
-                        <span>Service
-                            Management</span></a>
+                        <span>Service  Management</span></a>
+                </li>
+
+                <li class="">
+                    <a href="{{ route('review.management') }}"><i class="fa-solid fa-message"></i>
+                        <span>Review Management</span></a>
                 </li>
 
                 <li class="submenu nav-icon {{ Route::is('projects.management') ? 'open' : '' }}">

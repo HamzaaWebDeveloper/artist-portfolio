@@ -8,11 +8,13 @@ use App\Models\niches;
 use App\Models\project;
 use App\Models\projectimages;
 use App\Models\services;
+use App\Models\reviewforum;
 use App\Models\websetting;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use PhpParser\Node\Expr\FuncCall;
 
 class AdminController extends Controller
 {
@@ -495,5 +497,142 @@ class AdminController extends Controller
         } catch (\Throwable $th) {
             return redirect()->back()->with("error", "Something Went Wrong!");
         }
+    }
+
+    public  function review(){
+        $title = "Review Management";
+        $websettings = websetting::find(1);
+        $reviews = reviewforum::all();
+        $data = compact("title","websettings","reviews");
+
+        return view("Admin.review-forum.index")->with($data);
+
+    }
+
+    public function addReview(){
+        $title = "Add Review";
+        $websettings = websetting::find(1);
+
+        $data = compact("title","websettings",);
+
+        return view("Admin.review-forum.add-review")->with($data);
+    }
+
+    public function storeReviews(Request $request){
+        $request->validate([
+            "name" => "required",
+            "review" => "required",
+            "video" => "nullable",
+            "twitter" => "nullable",
+            "instagram" => "nullable",
+            "gamejolt" => "nullable",
+            "reddit" => "nullable",
+            "discord" => "nullable",
+            "tiktok" => "nullable",
+        ]);
+
+        $storeReview = new reviewforum();
+
+        $storeReview->name = $request->name;
+        $storeReview->review = $request->review;
+        $storeReview->reddit = $request->reddit;
+        $storeReview->twitter = $request->twitter;
+        $storeReview->instagram = $request->instagram;
+        $storeReview->tiktok = $request->tiktok;
+        $storeReview->gamejolt = $request->gamejolt;
+        $storeReview->discord = $request->discord;
+
+
+        if($request->file("video")){
+            $video_name = Str::rand(16). ".". $request->video->getClientOriginalExtension();
+
+            $request->video->move(public_path("/review-video"),$video_name);
+
+            $storeReview->video = $video_name;
+        }
+
+        $storeReview->save();
+
+        if(session("admin_id")){
+            return redirect()->route("review.management")->with("success","Review has been added successfully");
+        }
+        else{
+            return redirect()->back()->with("success","Review has been added successfully");
+        }
+    }
+
+
+    public function editReview($id){
+        $title = "Review Management";
+        $websettings = websetting::find(1);
+        $reviews = reviewforum::find($id);
+        $data = compact("title","websettings","reviews");
+
+        return view("Admin.review-forum.edit-review")->with($data);
+    }
+
+    public function editStoreReviews(Request $request,$id){
+        $request->validate([
+            "name" => "required",
+            "review" => "required",
+            "video" => "nullable",
+            "twitter" => "nullable",
+            "instagram" => "nullable",
+            "gamejolt" => "nullable",
+            "reddit" => "nullable",
+            "discord" => "nullable",
+            "tiktok" => "nullable",
+        ]);
+
+        $editReview = reviewforum::find($id);
+
+        $editReview->name = $request->name;
+        $editReview->review = $request->review;
+        $editReview->reddit = $request->reddit;
+        $editReview->twitter = $request->twitter;
+        $editReview->instagram = $request->instagram;
+        $editReview->tiktok = $request->tiktok;
+        $editReview->gamejolt = $request->gamejolt;
+        $editReview->discord = $request->discord;
+
+
+        if($request->file("video")){
+            $video_name = Str::rand(16). ".". $request->video->getClientOriginalExtension();
+
+            $request->video->move(public_path("/review-video"),$video_name);
+
+            $editReview->video = $video_name;
+        }
+
+        $editReview->save();
+
+        if(session("admin_id")){
+            return redirect()->route("review.management")->with("success","Review has been added successfully");
+        }
+        else{
+            return redirect()->back()->with("success","Review has been added successfully");
+        }
+    }
+
+
+    public function updateReviews($id){
+
+        $reviews = reviewforum::find($id);
+
+        if ($reviews) {
+            $reviews->update([
+                "status" => $reviews->status == 1 ? 0 : 1,
+            ]);
+        }
+
+        return redirect()->back()->with("success","Review Status Has Been Updated Successfully");
+    }
+
+    public function deleteReviews($id){
+        $review = reviewforum::find($id);
+
+        $review->delete();
+
+        return redirect()->back()->with("success","Review Has Been Deleted Successfully");
     }
 }

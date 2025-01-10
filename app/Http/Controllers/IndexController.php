@@ -10,6 +10,7 @@ use App\Models\niches;
 use App\Models\project;
 use App\Models\services;
 use App\Models\websetting;
+use App\Models\reviewforum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -21,7 +22,8 @@ class IndexController extends Controller
         $niches = niches::orderBy('created_at','desc')->take(5)->get();
         $portfolio = project::with("projectImages","niche")->get();
         $services = services::all();
-        $data = compact("title","websetting","niches","portfolio","services");
+        $reviews = reviewforum::all();
+        $data = compact("title","websetting","niches","portfolio","services","reviews");
 
         return view("frontend.index")->with($data);
     }

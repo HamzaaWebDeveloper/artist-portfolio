@@ -1,5 +1,12 @@
 @if(Route::is("service.details"))
-<header id="header" class="header d-flex align-items-center fixed-top" style="background-color: black">
+
+<style>
+    .header{
+        background-color: black"
+    }
+
+</style>
+<header id="header" class="header-detail d-flex align-items-center fixed-top" >
     <div class="container-fluid navbar-css container-xl position-relative d-flex align-items-center justify-content-between onscrolled-css">
 
         <a href="{{ route("index") }}" class="logo d-flex align-items-center me-auto me-lg-0">

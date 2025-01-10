@@ -61,9 +61,7 @@
 
                                     <div class="col-lg-12 mb-2 form-group">
                                         <label for="" class="fw-bold">Description</label>
-                                        <textarea name="description" style="height: 140px !important;" class="form-control fw-bold">
-                                          {{ $services->description }}
-                                        </textarea>
+                                        <textarea name="description" style="height: 140px !important;" class="form-control fw-bold">{{ $services->description }}</textarea>
                                     </div>
 
                                     <div class="col-lg-12 mb-3 form-group">
